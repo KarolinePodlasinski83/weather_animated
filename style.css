@@ -1,0 +1,165 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    color: rgb(19, 20, 20);
+    
+    /* REMOVIDO: background-image daqui */
+    background-color: black; /* Isso vai escurecer a imagem do ::before */
+    position: relative;
+    overflow: hidden;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./images/flores-1160x665.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    
+    /* Quanto MENOR a opacidade aqui, MAIS ESCURO fica (pois mostra mais o preto do body) */
+    opacity: 0.6; 
+    z-index: -1;
+}
+
+#weather, #forecast{
+    text-align:center;
+}
+
+.card{
+    background:#1a2221;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+.container{
+margin-bottom: 24px;
+max-width:600px;
+margin:auto;
+padding:20px;
+text-align:center;
+justify-content: center;
+border: 1rem solid #1be1d7;
+border-radius: 1rem;
+}
+
+.search{
+display:flex;
+gap:10px;
+margin-bottom:20px;
+}
+
+input{
+flex:1;
+padding:10px;
+}
+
+button{
+padding:10px;
+cursor:pointer;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+margin-bottom:20px;
+}
+
+.forecast{
+display:flex;
+justify-content:space-between;
+}
+
+.day{
+background:white;
+padding:10px;
+border-radius:8px;
+width:18%;
+}
+
+.dark{
+background:#111;
+color:white;
+}
+
+.dark .card,
+.dark .day{
+background:#222;
+}
+
+/* ☀ SOL */
+
+.sun{
+position:absolute;
+top:50px;
+right:50px;
+width:100px;
+height:100px;
+background:yellow;
+border-radius:50%;
+box-shadow:0 0 40px yellow;
+animation:rotate 20s linear infinite;
+}
+
+@keyframes rotate{
+0%{transform:rotate(0)}
+100%{transform:rotate(360deg)}
+}
+
+/* ☁ NUVENS */
+
+.cloud{
+position:absolute;
+top:80px;
+left:-200px;
+width:200px;
+height:60px;
+background:white;
+border-radius:50px;
+animation:cloudMove 30s linear infinite;
+}
+
+@keyframes cloudMove{
+0%{left:-200px}
+100%{left:100%}
+}
+
+/* 🌧 CHUVA */
+
+.rain{
+position:absolute;
+width:2px;
+height:20px;
+background:white;
+animation:rainFall 1s linear infinite;
+}
+
+@keyframes rainFall{
+0%{transform:translateY(0)}
+100%{transform:translateY(100vh)}
+}
+
+/* ❄ NEVE */
+
+.snow{
+position:absolute;
+color:white;
+font-size:20px;
+animation:snowFall 5s linear infinite;
+}
+
+@keyframes snowFall{
+0%{transform:translateY(-10vh)}
+100%{transform:translateY(100vh)}
+}
