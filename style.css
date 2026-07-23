@@ -1,165 +1,224 @@
+/* ==========================================
+   ESTILOS GERAIS E LAYOUT
+   ========================================== */
+
 body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-family: Arial, sans-serif;
-    color: rgb(19, 20, 20);
-    
-    /* REMOVIDO: background-image daqui */
-    background-color: black; /* Isso vai escurecer a imagem do ::before */
-    position: relative;
-    overflow: hidden;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  color: rgb(19, 20, 20);
+  background-color: black; /* Escurece a imagem de fundo */
+  position: relative;
+  overflow: hidden;
 }
 
 body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('./images/flores-1160x665.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    
-    /* Quanto MENOR a opacidade aqui, MAIS ESCURO fica (pois mostra mais o preto do body) */
-    opacity: 0.6; 
-    z-index: -1;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("./images/flores-1160x665.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.6; /* Controle de escurecimento do fundo */
+  z-index: -1;
 }
 
-#weather, #forecast{
-    text-align:center;
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  justify-content: center;
+  border: 1rem solid #1be1d7;
+  border-radius: 1rem;
+  position: relative;
+  z-index: 2; /* Garante que o container fique acima das animações */
 }
 
-.card{
-    background:#1a2221;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 0 15px rgba(0,0,0,0.3);
+.search {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-.container{
-margin-bottom: 24px;
-max-width:600px;
-margin:auto;
-padding:20px;
-text-align:center;
-justify-content: center;
-border: 1rem solid #1be1d7;
-border-radius: 1rem;
+input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
-.search{
-display:flex;
-gap:10px;
-margin-bottom:20px;
+button {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  border: none;
+  font-weight: bold;
 }
 
-input{
-flex:1;
-padding:10px;
+#weather,
+#forecast {
+  text-align: center;
 }
 
-button{
-padding:10px;
-cursor:pointer;
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.card{
-background:white;
-padding:20px;
-border-radius:10px;
-margin-bottom:20px;
+.forecast {
+  display: flex;
+  justify-content: space-between;
 }
 
-.forecast{
-display:flex;
-justify-content:space-between;
+.day {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  width: 18%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.day{
-background:white;
-padding:10px;
-border-radius:8px;
-width:18%;
-}
-
-.dark{
-background:#111;
-color:white;
+/* Modo Escuro */
+.dark {
+  background: #111;
+  color: white;
 }
 
 .dark .card,
-.dark .day{
-background:#222;
+.dark .day {
+  background: #222;
+  color: white;
 }
+
+/* ==========================================
+   ANIMAÇÕES CLIMÁTICAS (NITIDAS E DESTAÇADAS)
+   ========================================== */
 
 /* ☀ SOL */
-
-.sun{
-position:absolute;
-top:50px;
-right:50px;
-width:100px;
-height:100px;
-background:yellow;
-border-radius:50%;
-box-shadow:0 0 40px yellow;
-animation:rotate 20s linear infinite;
+.sun {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  width: 90px;
+  height: 90px;
+  background: #ffcc00;
+  border-radius: 50%;
+  border: 3px solid #ffa500;
+  box-shadow:
+    0 0 25px #ffcc00,
+    0 0 50px #ff9900;
+  animation: rotate 20s linear infinite;
+  z-index: 1;
 }
 
-@keyframes rotate{
-0%{transform:rotate(0)}
-100%{transform:rotate(360deg)}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* ☁ NUVENS */
-
-.cloud{
-position:absolute;
-top:80px;
-left:-200px;
-width:200px;
-height:60px;
-background:white;
-border-radius:50px;
-animation:cloudMove 30s linear infinite;
+.cloud {
+  position: absolute;
+  top: 80px;
+  left: -200px;
+  width: 180px;
+  height: 60px;
+  background: #ffffff;
+  border-radius: 50px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+  animation: cloudMove 25s linear infinite;
+  z-index: 1;
 }
 
-@keyframes cloudMove{
-0%{left:-200px}
-100%{left:100%}
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.cloud::before {
+  width: 80px;
+  height: 80px;
+  top: -35px;
+  left: 25px;
+}
+
+.cloud::after {
+  width: 60px;
+  height: 60px;
+  top: -20px;
+  right: 25px;
+}
+
+@keyframes cloudMove {
+  0% {
+    left: -200px;
+  }
+  100% {
+    left: 100vw;
+  }
 }
 
 /* 🌧 CHUVA */
-
-.rain{
-position:absolute;
-width:2px;
-height:20px;
-background:white;
-animation:rainFall 1s linear infinite;
+.rain {
+  position: absolute;
+  width: 3px;
+  height: 25px;
+  background: #00d2ff;
+  box-shadow: 0 0 8px #00d2ff;
+  border-radius: 2px;
+  animation: rainFall 0.8s linear infinite;
+  z-index: 1;
 }
 
-@keyframes rainFall{
-0%{transform:translateY(0)}
-100%{transform:translateY(100vh)}
+@keyframes rainFall {
+  0% {
+    transform: translateY(-20px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0.2;
+  }
 }
 
 /* ❄ NEVE */
-
-.snow{
-position:absolute;
-color:white;
-font-size:20px;
-animation:snowFall 5s linear infinite;
+.snow {
+  position: absolute;
+  color: #ffffff;
+  font-size: 24px;
+  text-shadow:
+    0 0 8px #00f2fe,
+    0 0 12px #4facfe;
+  animation: snowFall 4s linear infinite;
+  z-index: 1;
 }
 
-@keyframes snowFall{
-0%{transform:translateY(-10vh)}
-100%{transform:translateY(100vh)}
+@keyframes snowFall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0.3;
+  }
 }
