@@ -2,18 +2,24 @@
    ESTILOS GERAIS E LAYOUT
    ========================================== */
 
+* {
+  box-sizing: border-box; /* Garante que padding e border não estourem a largura */
+}
+
 body {
   margin: 0;
-  height: 100vh;
+  min-height: 100vh; /* Permite que a página cresça se o conteúdo for maior que a tela */
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   font-family: Arial, sans-serif;
   color: rgb(19, 20, 20);
-  background-color: black; /* Escurece a imagem de fundo */
+  background-color: black;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+  overflow-y: auto; /* Permite rolagem vertical em telas menores */
+  padding: 20px 10px;
 }
 
 body::before {
@@ -27,20 +33,27 @@ body::before {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  opacity: 0.6; /* Controle de escurecimento do fundo */
+  opacity: 0.6;
   z-index: -1;
 }
 
 .container {
+  width: 100%;
   max-width: 600px;
   margin: auto;
   padding: 20px;
   text-align: center;
-  justify-content: center;
-  border: 1rem solid #1be1d7;
+  border: 0.5rem solid #1be1d7; /* Borda reduzida para otimizar espaço */
   border-radius: 1rem;
   position: relative;
-  z-index: 2; /* Garante que o container fique acima das animações */
+  z-index: 2;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Suave transparência para destaque */
+  backdrop-filter: blur(5px); /* Efeito de vidro opcional */
 }
 
 .search {
@@ -54,14 +67,16 @@ input {
   padding: 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
+  font-size: 1rem;
 }
 
 button {
-  padding: 10px;
+  padding: 10px 15px;
   cursor: pointer;
   border-radius: 6px;
   border: none;
   font-weight: bold;
+  font-size: 1rem;
 }
 
 #weather,
@@ -77,16 +92,20 @@ button {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Previsão do Tempo */
 .forecast {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap; /* Permite quebrar linha quando necessário */
 }
 
 .day {
   background: white;
   padding: 10px;
   border-radius: 8px;
-  width: 18%;
+  flex: 1 1 calc(20% - 10px); /* Ocupa proporcionalmente o espaço disponível */
+  min-width: 80px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -103,16 +122,16 @@ button {
 }
 
 /* ==========================================
-   ANIMAÇÕES CLIMÁTICAS (NITIDAS E DESTAÇADAS)
+   ANIMAÇÕES CLIMÁTICAS
    ========================================== */
 
 /* ☀ SOL */
 .sun {
   position: absolute;
-  top: 40px;
-  right: 40px;
-  width: 90px;
-  height: 90px;
+  top: 20px;
+  right: 20px;
+  width: 70px;
+  height: 70px;
   background: #ffcc00;
   border-radius: 50%;
   border: 3px solid #ffa500;
@@ -135,10 +154,10 @@ button {
 /* ☁ NUVENS */
 .cloud {
   position: absolute;
-  top: 80px;
+  top: 60px;
   left: -200px;
-  width: 180px;
-  height: 60px;
+  width: 150px;
+  height: 50px;
   background: #ffffff;
   border-radius: 50px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
@@ -155,17 +174,17 @@ button {
 }
 
 .cloud::before {
-  width: 80px;
-  height: 80px;
-  top: -35px;
-  left: 25px;
+  width: 65px;
+  height: 65px;
+  top: -30px;
+  left: 20px;
 }
 
 .cloud::after {
-  width: 60px;
-  height: 60px;
-  top: -20px;
-  right: 25px;
+  width: 50px;
+  height: 50px;
+  top: -15px;
+  right: 20px;
 }
 
 @keyframes cloudMove {
@@ -220,5 +239,40 @@ button {
   100% {
     transform: translateY(100vh) rotate(360deg);
     opacity: 0.3;
+  }
+}
+
+/* ==========================================
+   MEDIA QUERIES (RESPONSIVIDADE AJUSTADA)
+   ========================================== */
+
+/* Dispositivos Móveis (Telas de até 600px) */
+@media (max-width: 600px) {
+  .container {
+    padding: 15px;
+    border-width: 0.3rem; /* Borda ainda mais fina no celular */
+  }
+
+  .search {
+    flex-direction: column; /* Input e Botão empilhados */
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .forecast {
+    gap: 8px;
+  }
+
+  .day {
+    flex: 1 1 calc(50% - 8px); /* 2 cards por linha no celular */
+  }
+
+  .sun {
+    width: 50px;
+    height: 50px;
+    top: 10px;
+    right: 10px;
   }
 }
