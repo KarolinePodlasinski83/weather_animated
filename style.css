@@ -11,8 +11,8 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100vh;
-  overflow: hidden; /* Mantém tudo fixo na tela sem barras de rolagem */
+  min-height: 100vh;
+  overflow-x: hidden;
   font-family: Arial, sans-serif;
   color: rgb(19, 20, 20);
   background-color: black;
@@ -21,7 +21,7 @@ body {
   align-items: center;
 }
 
-/* Imagem de Fundo (Full Screen) */
+/* Imagem de Fundo em Tela Cheia */
 body::before {
   content: "";
   position: fixed;
@@ -37,48 +37,83 @@ body::before {
   z-index: -1;
 }
 
-/* Container Centralizado e Compacto */
+/* Container Centralizado e Proporcional */
 .container {
   width: 90%;
-  max-width: 420px; /* Largura proporcional idêntica ao preview */
-  padding: 20px;
+  max-width: 500px;
+  padding: 25px 20px;
   text-align: center;
-  border: 6px solid #1be1d7; /* Borda ciano destacada */
-  border-radius: 1rem;
+  border: 8px solid #1be1d7; /* Borda ciano das imagens */
+  border-radius: 1.5rem;
   position: relative;
   z-index: 2;
-  background-color: rgba(255, 255, 255, 0.15); /* Fundo levemente translúcido */
-  backdrop-filter: blur(4px); /* Efeito de vidro */
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  margin: 20px auto;
 }
 
-/* Barra de Pesquisa */
+/* ==========================================
+   BOTÃO MODO ESCURO (CANTO SUPERIOR ESQUERDO)
+   ========================================== */
+
+.btn-dark-mode {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 6px 14px;
+  border-radius: 40%; /* Arredondamento solicitado */
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+  color: #333;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition:
+    background-color 0.3s,
+    transform 0.2s;
+  z-index: 10;
+}
+
+.btn-dark-mode:hover {
+  transform: scale(1.03);
+  background-color: #f0f0f0;
+}
+
+/* Ajuste no título para não sobrepor o botão */
+.container h2 {
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+/* ==========================================
+   INPUTS E BUSCA
+   ========================================== */
+
 .search {
   display: flex;
   gap: 8px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 input {
   flex: 1;
-  padding: 8px 12px;
+  padding: 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
+  font-size: 0.95rem;
   outline: none;
 }
 
-button {
-  padding: 8px 15px;
+button:not(.btn-dark-mode) {
+  padding: 10px 16px;
   cursor: pointer;
   border-radius: 6px;
   border: none;
   font-weight: bold;
   background-color: #ffffff;
-  transition: 0.2s;
-}
-
-button:hover {
-  background-color: #e0e0e0;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
 #weather,
@@ -88,38 +123,61 @@ button:hover {
 
 .card {
   background: white;
-  padding: 15px;
+  padding: 20px;
   border-radius: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Previsão do Tempo */
+.temp-icon {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+
+/* Previsão dos 5 Dias */
 .forecast {
   display: flex;
   justify-content: space-between;
-  gap: 5px;
+  gap: 6px;
 }
 
 .day {
   background: white;
-  padding: 8px 4px;
+  padding: 10px 4px;
   border-radius: 8px;
   flex: 1;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Modo Escuro */
+.day p {
+  margin: 0 0 5px 0;
+  font-size: 0.75rem;
+}
+
+/* ==========================================
+   MODO ESCURO APLICADO
+   ========================================== */
+
 .dark {
-  background: #111;
+  background-color: #121212;
   color: white;
+}
+
+.dark .container {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .dark .card,
 .dark .day {
-  background: #222;
+  background: #222222;
   color: white;
+}
+
+.dark .btn-dark-mode {
+  background-color: #333;
+  color: #fff;
+  border-color: #555;
 }
 
 /* ==========================================
@@ -128,10 +186,10 @@ button:hover {
 
 .sun {
   position: absolute;
-  top: 30px;
-  right: 30px;
-  width: 70px;
-  height: 70px;
+  top: 40px;
+  right: 40px;
+  width: 80px;
+  height: 80px;
   background: #ffcc00;
   border-radius: 50%;
   border: 3px solid #ffa500;
@@ -153,10 +211,10 @@ button:hover {
 
 .cloud {
   position: absolute;
-  top: 60px;
+  top: 80px;
   left: -200px;
-  width: 150px;
-  height: 50px;
+  width: 180px;
+  height: 60px;
   background: #ffffff;
   border-radius: 50px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
@@ -173,17 +231,17 @@ button:hover {
 }
 
 .cloud::before {
-  width: 65px;
-  height: 65px;
-  top: -30px;
-  left: 20px;
+  width: 80px;
+  height: 80px;
+  top: -35px;
+  left: 25px;
 }
 
 .cloud::after {
-  width: 50px;
-  height: 50px;
-  top: -15px;
-  right: 20px;
+  width: 60px;
+  height: 60px;
+  top: -20px;
+  right: 25px;
 }
 
 @keyframes cloudMove {
@@ -192,49 +250,5 @@ button:hover {
   }
   100% {
     left: 100vw;
-  }
-}
-
-.rain {
-  position: absolute;
-  width: 3px;
-  height: 25px;
-  background: #00d2ff;
-  box-shadow: 0 0 8px #00d2ff;
-  border-radius: 2px;
-  animation: rainFall 0.8s linear infinite;
-  z-index: 1;
-}
-
-@keyframes rainFall {
-  0% {
-    transform: translateY(-20px);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh);
-    opacity: 0.2;
-  }
-}
-
-.snow {
-  position: absolute;
-  color: #ffffff;
-  font-size: 24px;
-  text-shadow:
-    0 0 8px #00f2fe,
-    0 0 12px #4facfe;
-  animation: snowFall 4s linear infinite;
-  z-index: 1;
-}
-
-@keyframes snowFall {
-  0% {
-    transform: translateY(-10vh) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0.3;
   }
 }

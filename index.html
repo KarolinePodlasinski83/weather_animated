@@ -1,39 +1,70 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App de Clima</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Container Principal -->
+    <div class="container">
+      <!-- Botão de Modo Escuro no Canto Superior Esquerdo -->
+      <button id="theme-toggle" class="btn-dark-mode">🌙 Modo Escuro</button>
 
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Weather App</title>
-<link rel="stylesheet" href="style.css">
-</head>
+      <h2>🌧 App de Clima</h2>
 
-<body>
+      <!-- Campo de Busca -->
+      <div class="search">
+        <input type="text" id="city-input" placeholder="Digite a cidade" />
+        <button id="search-btn">Buscar</button>
+      </div>
 
-<div class="weather-animation" id="animation"></div>
+      <!-- Informações do Clima Atual -->
+      <div id="weather">
+        <div class="card">
+          <h3>Taquara</h3>
+          <div class="temp-icon">🟠</div>
+          <p>céu limpo</p>
+          <h2>30°C</h2>
+        </div>
+      </div>
 
-<div class="container">
+      <!-- Previsão dos Próximos Dias -->
+      <div id="forecast" class="forecast">
+        <div class="day">
+          <p>31/07/2026</p>
+          <strong>30°C</strong>
+        </div>
+        <div class="day">
+          <p>01/08/2026</p>
+          <strong>29°C</strong>
+        </div>
+        <div class="day">
+          <p>02/08/2026</p>
+          <strong>19°C</strong>
+        </div>
+        <div class="day">
+          <p>03/08/2026</p>
+          <strong>25°C</strong>
+        </div>
+        <div class="day">
+          <p>04/08/2026</p>
+          <strong>17°C</strong>
+        </div>
+      </div>
+    </div>
 
-<h1>🌦 App de Clima</h1>
+    <!-- Animações Climáticas no Fundo (Opcionais) -->
+    <div class="sun"></div>
+    <div class="cloud"></div>
 
-<div class="search">
-
-<input type="text" id="cityInput" placeholder="Digite a cidade">
-<button onclick="buscarCidade()">Buscar</button>
-
-</div>
-
-<div id="weather"></div>
-
-<h2>Previsão</h2>
-
-<div id="forecast"></div>
-
-<button id="darkMode">🌙 Modo Escuro</button>
-
-</div>
-
-<script src="script.js"></script>
-
-</body>
+    <script>
+      // Script básico para alternar o modo escuro
+      const themeBtn = document.getElementById("theme-toggle");
+      themeBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark");
+      });
+    </script>
+  </body>
 </html>
