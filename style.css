@@ -35,23 +35,20 @@ body {
 /* Pseudo-elemento da Imagem de Fundo */
 body::before {
   content: "";
-  display: block; /* Garante a renderização */
+  display: block;
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-
-  /* Caminho exatamente como está no seu Live Server */
-  background-image: url("./images/flores-1160x665.jpg");
+  /* Teste com link externo direto para validar a Vercel */
+  background-image: url("https://images.unsplash.com/photo-1520763185298-1b434c919102?q=80&w=1600");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-
-  opacity: 0.6; /* Escurecimento suave da imagem */
-  background-color: black; /* Fundo preto sob a imagem de fallback */
-
-  z-index: -1; /* Fica atrás do container e das animações */
+  opacity: 0.6;
+  background-color: black;
+  z-index: -1;
 }
 
 /* Container Centralizado e Proporcional */
