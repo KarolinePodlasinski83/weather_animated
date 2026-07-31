@@ -1,40 +1,57 @@
 /* ==========================================
-   ESTILOS GERAIS E LAYOUT
+  ESTILOS GERAIS E LAYOUT
    ========================================== */
 
 * {
   box-sizing: border-box;
 }
 
-html,
+/* ==========================================
+   CORREÇÃO DO FUNDO E LAYOUT
+   ========================================= */
+
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
   width: 100%;
   min-height: 100vh;
-  overflow-x: hidden;
   font-family: Arial, sans-serif;
   color: rgb(19, 20, 20);
-  background-color: black;
+
+  /* IMPORTANTE: Removemos o background-color: black daqui para não cobrir a imagem */
+  background: transparent;
+
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* Imagem de Fundo em Tela Cheia */
+/* Pseudo-elemento da Imagem de Fundo */
 body::before {
   content: "";
+  display: block; /* Garante a renderização */
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
+
+  /* Caminho exatamente como está no seu Live Server */
   background-image: url("./images/flores-1160x665.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  opacity: 0.6;
-  z-index: -1;
+
+  opacity: 0.6; /* Escurecimento suave da imagem */
+  background-color: black; /* Fundo preto sob a imagem de fallback */
+
+  z-index: -1; /* Fica atrás do container e das animações */
 }
 
 /* Container Centralizado e Proporcional */
@@ -53,7 +70,7 @@ body::before {
 }
 
 /* ==========================================
-   BOTÃO MODO ESCURO (CANTO SUPERIOR ESQUERDO)
+      BOTÃO MODO ESCURO (CANTO SUPERIOR ESQUERDO)
    ========================================== */
 
 .btn-dark-mode {
@@ -87,7 +104,7 @@ body::before {
 }
 
 /* ==========================================
-   INPUTS E BUSCA
+    INPUTS E BUSCA
    ========================================== */
 
 .search {
@@ -108,7 +125,7 @@ input {
 button:not(.btn-dark-mode) {
   padding: 10px 16px;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 30%;
   border: none;
   font-weight: bold;
   background-color: #ffffff;
@@ -156,7 +173,7 @@ button:not(.btn-dark-mode) {
 }
 
 /* ==========================================
-   MODO ESCURO APLICADO
+      MODO ESCURO APLICADO
    ========================================== */
 
 .dark {
@@ -181,7 +198,7 @@ button:not(.btn-dark-mode) {
 }
 
 /* ==========================================
-   ANIMAÇÕES CLIMÁTICAS
+    ANIMAÇÕES CLIMÁTICAS
    ========================================== */
 
 .sun {
